@@ -1,30 +1,71 @@
+# dependencies
 node_modules/
 .pnpm-store/
 
+# compiled output
 dist/
 build/
-coverage/
 *.tsbuildinfo
 
+# tests
+coverage/
+.nyc_output/
+
+# cache
+.vite/
+.cache/
+
+# logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# environment
 .env
 .env.*
 !.env.example
 
-.vite/
-.cache/
-
-*.log
-pnpm-debug.log*
-
-.DS_Store
-.idea/
-.vscode/
-
+# uploads and temp
 uploads/
 tmp/
 temp/
+.temp/
+.tmp/
 
+# package managers
 package-lock.json
 yarn.lock
 npm-shrinkwrap.json
 !pnpm-lock.yaml
+
+# runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
