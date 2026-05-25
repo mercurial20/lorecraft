@@ -1,7 +1,7 @@
 {
   "name": "@lorecraft/shared",
   "version": "1.0.0",
-  "private": "true",
+  "private": true,
   "type": "module",
   "description": "Shared utils and types, contracts",
   "main": "./dist/index.js",
@@ -13,9 +13,10 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "pnpm run clean && tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "dev": "tsc -b tsconfig.json --watch --preserveWatchOutput"
   },
   "keywords": [],
   "author": "Medet Kozhabayev",
