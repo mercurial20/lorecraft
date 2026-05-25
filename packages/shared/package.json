@@ -1,0 +1,27 @@
+{
+  "name": "@lorecraft/shared",
+  "version": "1.0.0",
+  "private": "true",
+  "type": "module",
+  "description": "Shared utils and types, contracts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [],
+  "author": "Medet Kozhabayev",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.1",
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
