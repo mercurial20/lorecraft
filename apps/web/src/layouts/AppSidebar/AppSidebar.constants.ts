@@ -1,0 +1,2 @@
+export const APP_SIDEBAR_WIDTH = 300;
+export const APP_SIDEBAR_COLLAPSED_WIDTH = 68;

@@ -4,7 +4,8 @@ import { createRoot } from "react-dom/client";
 import App from "@/App";
 
 import "antd/dist/reset.css";
-import "@/index.css";
+import "@/styles/overrides.scss";
+import "@/index.scss";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

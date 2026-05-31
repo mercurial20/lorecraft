@@ -1,0 +1,117 @@
+.item {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: var(--app-sidebar-item-height, 40px);
+  grid-template-columns: var(--app-sidebar-row-icon-column, 56px) minmax(0, 1fr);
+  align-items: center;
+  padding: 0;
+  border: 0;
+  color: var(--ant-color-text-secondary, #cfc5b2);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  text-align: left;
+  transition:
+    color var(--app-sidebar-row-transition, 160ms ease),
+    background-color var(--app-sidebar-row-transition, 160ms ease);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--ant-color-text, #eee8dc);
+    background: var(--ant-color-bg-text-hover, rgba(238, 232, 220, 0.06));
+    outline: none;
+  }
+}
+
+.item::before {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 2px;
+  background: transparent;
+  content: "";
+  transition: background-color var(--app-sidebar-row-transition, 160ms ease);
+}
+
+.itemActive {
+  color: var(--ant-color-primary, #d9b437);
+  background: var(--ant-control-item-bg-active, rgba(217, 180, 55, 0.14));
+}
+
+.itemActive::before {
+  background: var(--ant-color-primary, #d9b437);
+}
+
+.itemProfile {
+  height: var(--app-sidebar-profile-height, 44px);
+  grid-template-columns: var(--app-sidebar-row-icon-column, 56px) minmax(0, 1fr) 32px;
+}
+
+.iconSlot {
+  display: inline-flex;
+  width: var(--app-sidebar-icon-slot, 68px);
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.label {
+  min-width: 0;
+  overflow: hidden;
+  opacity: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition:
+    opacity var(--app-sidebar-row-transition, 160ms ease),
+    transform var(--app-sidebar-row-transition, 160ms ease);
+}
+
+.itemProfile .label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  white-space: normal;
+}
+
+.title,
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title {
+  color: var(--ant-color-text, #eee8dc);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.description {
+  color: var(--ant-color-text-tertiary, #9d927f);
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.suffix {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ant-color-text-tertiary, #9d927f);
+  font-size: 16px;
+  opacity: 1;
+  transition: opacity var(--app-sidebar-row-transition, 160ms ease);
+}
+
+.itemCollapsed .label {
+  opacity: 0;
+  transform: translateX(-4px);
+}
+
+.itemCollapsed .suffix {
+  opacity: 0;
+}

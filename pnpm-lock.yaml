@@ -110,6 +110,9 @@ importers:
       antd:
         specifier: ^6.4.3
         version: 6.4.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       react:
         specifier: ^19.2.6
         version: 19.2.6
@@ -119,6 +122,9 @@ importers:
       react-router:
         specifier: ^7.16.0
         version: 7.16.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      zustand:
+        specifier: ^5.0.14
+        version: 5.0.14(@types/react@19.2.15)(react@19.2.6)
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -150,6 +156,9 @@ importers:
       globals:
         specifier: ^17.6.0
         version: 17.6.0
+      sass:
+        specifier: ^1.100.0
+        version: 1.100.0
       typescript:
         specifier: ~6.0.2
         version: 6.0.3
@@ -3855,6 +3864,24 @@ packages:
   zod@4.4.3:
     resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
+  zustand@5.0.14:
+    resolution: {integrity: sha512-/8tAspM5LMPr28b3fwLYrtdj77ECpfZviaP75CMTnwO8ISyaE4GDIG/9rDDYq/cH9D2Xw2A2RXglLInmVBQB/g==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
+        optional: true
+
 snapshots:
 
   '@angular-devkit/core@19.2.24(chokidar@4.0.3)':
@@ -5888,7 +5915,6 @@ snapshots:
   chokidar@5.0.0:
     dependencies:
       readdirp: 5.0.0
-    optional: true
 
   chrome-trace-event@1.0.4: {}
 
@@ -6492,8 +6518,7 @@ snapshots:
 
   ignore@7.0.5: {}
 
-  immutable@5.1.5:
-    optional: true
+  immutable@5.1.5: {}
 
   import-fresh@3.3.1:
     dependencies:
@@ -7311,8 +7336,7 @@ snapshots:
 
   readdirp@4.1.2: {}
 
-  readdirp@5.0.0:
-    optional: true
+  readdirp@5.0.0: {}
 
   reflect-metadata@0.2.2: {}
 
@@ -7383,7 +7407,6 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.6
-    optional: true
 
   scheduler@0.27.0: {}
 
@@ -7931,3 +7954,8 @@ snapshots:
       zod: 4.4.3
 
   zod@4.4.3: {}
+
+  zustand@5.0.14(@types/react@19.2.15)(react@19.2.6):
+    optionalDependencies:
+      '@types/react': 19.2.15
+      react: 19.2.6

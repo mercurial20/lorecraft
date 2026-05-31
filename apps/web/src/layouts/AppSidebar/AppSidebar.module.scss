@@ -1,0 +1,15 @@
+.sidebar {
+  --app-sidebar-icon-slot: var(--app-sidebar-collapsed-width, 68px);
+  --app-sidebar-item-height: 40px;
+  --app-sidebar-profile-height: 44px;
+  --app-sidebar-row-icon-column: 56px;
+  --app-sidebar-row-transition: 160ms ease;
+
+  height: 100dvh;
+  flex: 0 0 auto;
+  border-right: 1px solid #4d4635;
+}
+
+.sidebarFlex {
+  height: 100%;
+}
