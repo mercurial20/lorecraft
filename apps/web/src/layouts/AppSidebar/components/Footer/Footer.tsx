@@ -9,9 +9,9 @@ import { Dropdown, type MenuProps } from "antd";
 
 import { useUIStore } from "@/shared/stores/useUIStore";
 
-import { AppSidebarItem } from "../AppSidebarItem/AppSidebarItem";
+import { AppSidebarItem } from "../Item";
 
-import styles from "./AppSidebarFooter.module.scss";
+import styles from "./Footer.module.scss";
 
 const footerMenuItems: MenuProps["items"] = [
   {

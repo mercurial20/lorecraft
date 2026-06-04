@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from "react";
 
-import styles from "./AppSidebarItem.module.scss";
+import styles from "./Item.module.scss";
 
 type AppSidebarItemVariant = "default" | "profile";
 

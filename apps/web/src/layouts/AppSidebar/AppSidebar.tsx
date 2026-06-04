@@ -8,9 +8,9 @@ import {
   APP_SIDEBAR_COLLAPSED_WIDTH,
   APP_SIDEBAR_WIDTH,
 } from "./AppSidebar.constants";
-import { AppSidebarFooter } from "./components/AppSidebarFooter/AppSidebarFooter";
-import { AppSidebarHeader } from "./components/AppSidebarHeader/AppSidebarHeader";
-import { AppSidebarMenu } from "./components/AppSidebarMenu/AppSidebarMenu";
+import { AppSidebarFooter } from "./components/Footer";
+import { AppSidebarHeader } from "./components/Header";
+import { AppSidebarMenu } from "./components/Menu";
 
 import styles from "./AppSidebar.module.scss";
 

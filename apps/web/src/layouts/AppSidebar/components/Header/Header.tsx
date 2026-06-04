@@ -4,9 +4,9 @@ import clsx from "clsx";
 import { SidebarIconOutlined } from "@/shared/icons/SidebarIconOutlined";
 import { useUIStore } from "@/shared/stores/useUIStore";
 
-import { AppSidebarSearch } from "../AppSidebarSearch/AppSidebarSearch";
+import { AppSidebarSearch } from "../Search";
 
-import styles from "./AppSidebarHeader.module.scss";
+import styles from "./Header.module.scss";
 
 const AppSidebarHeader = () => {
   const sidebarCollapsed = useUIStore((state) => state.sidebarCollapsed);

@@ -2,9 +2,9 @@ import { SearchOutlined } from "@ant-design/icons";
 
 import { useUIStore } from "@/shared/stores/useUIStore";
 
-import { AppSidebarItem } from "../AppSidebarItem/AppSidebarItem";
+import { AppSidebarItem } from "../Item";
 
-import styles from "./AppSidebarSearch.module.scss";
+import styles from "./Search.module.scss";
 
 const AppSidebarSearch = () => {
   const sidebarCollapsed = useUIStore((state) => state.sidebarCollapsed);

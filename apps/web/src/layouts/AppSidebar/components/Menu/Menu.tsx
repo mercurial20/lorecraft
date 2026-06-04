@@ -4,9 +4,9 @@ import { useLocation, useNavigate } from "react-router";
 
 import { useUIStore } from "@/shared/stores/useUIStore";
 
-import { AppSidebarItem } from "../AppSidebarItem/AppSidebarItem";
+import { AppSidebarItem } from "../Item";
 
-import styles from "./AppSidebarMenu.module.scss";
+import styles from "./Menu.module.scss";
 
 interface SidebarItem {
   icon: ReactNode;
