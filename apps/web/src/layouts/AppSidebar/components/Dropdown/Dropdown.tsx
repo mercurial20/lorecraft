@@ -1,67 +1,34 @@
 import { Dropdown, type DropdownProps } from "antd";
 import type { CSSProperties } from "react";
 
+import { useUIStore } from "@/shared/stores/useUIStore";
+
 import { APP_SIDEBAR_WIDTH } from "../../AppSidebar.constants";
 
 import styles from "./Dropdown.module.scss";
 
-const APP_SIDEBAR_DROPDOWN_INSET = 6;
-const APP_SIDEBAR_DROPDOWN_COLLAPSED_MIN_WIDTH = 240;
-const APP_SIDEBAR_DROPDOWN_EXPANDED_WIDTH =
-  APP_SIDEBAR_WIDTH - APP_SIDEBAR_DROPDOWN_INSET * 2;
+const DROPDOWN_INSET = 6;
+const COLLAPSED_DROPDOWN_WIDTH = 240;
 
-type AppSidebarDropdownRootStyle = CSSProperties & {
+type AppSidebarDropdownStyle = CSSProperties & {
   "--app-sidebar-dropdown-inset": string;
   "--app-sidebar-dropdown-width": string;
 };
 
-interface AppSidebarDropdownProps extends Omit<
-  DropdownProps,
-  "classNames" | "styles"
-> {
-  collapsed: boolean;
-  collapsedMinWidth?: number;
-  expandedInset?: number;
-  expandedWidth?: number;
-}
+type AppSidebarDropdownProps = Omit<DropdownProps, "classNames" | "styles">;
 
-const getDropdownRootStyle = ({
-  collapsed,
-  collapsedMinWidth,
-  expandedInset,
-  expandedWidth,
-}: Required<
-  Pick<
-    AppSidebarDropdownProps,
-    "collapsed" | "collapsedMinWidth" | "expandedInset" | "expandedWidth"
-  >
->): AppSidebarDropdownRootStyle => {
-  if (collapsed) {
-    return {
-      "--app-sidebar-dropdown-inset": "0px",
-      "--app-sidebar-dropdown-width": `${collapsedMinWidth}px`,
-    };
-  }
+const expandedDropdownWidth = APP_SIDEBAR_WIDTH - DROPDOWN_INSET * 2;
 
-  return {
-    "--app-sidebar-dropdown-inset": `${expandedInset}px`,
-    "--app-sidebar-dropdown-width": `${expandedWidth}px`,
+const AppSidebarDropdown = (dropdownProps: AppSidebarDropdownProps) => {
+  const sidebarCollapsed = useUIStore((state) => state.sidebarCollapsed);
+  const rootStyle: AppSidebarDropdownStyle = {
+    "--app-sidebar-dropdown-inset": sidebarCollapsed
+      ? "0px"
+      : `${DROPDOWN_INSET}px`,
+    "--app-sidebar-dropdown-width": sidebarCollapsed
+      ? `${COLLAPSED_DROPDOWN_WIDTH}px`
+      : `${expandedDropdownWidth}px`,
   };
-};
-
-const AppSidebarDropdown = ({
-  collapsed,
-  collapsedMinWidth = APP_SIDEBAR_DROPDOWN_COLLAPSED_MIN_WIDTH,
-  expandedInset = APP_SIDEBAR_DROPDOWN_INSET,
-  expandedWidth = APP_SIDEBAR_DROPDOWN_EXPANDED_WIDTH,
-  ...dropdownProps
-}: AppSidebarDropdownProps) => {
-  const rootStyle = getDropdownRootStyle({
-    collapsed,
-    collapsedMinWidth,
-    expandedInset,
-    expandedWidth,
-  });
 
   return (
     <Dropdown

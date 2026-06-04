@@ -91,7 +91,6 @@ const AppSidebarWorldSelect = () => {
   return (
     <div className={styles.root}>
       <AppSidebarDropdown
-        collapsed={sidebarCollapsed}
         menu={{
           items: menuItems,
           onClick: handleMenuClick,

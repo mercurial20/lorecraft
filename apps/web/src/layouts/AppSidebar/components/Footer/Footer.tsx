@@ -47,7 +47,6 @@ const AppSidebarFooter = () => {
   return (
     <div className={styles.container}>
       <AppSidebarDropdown
-        collapsed={sidebarCollapsed}
         menu={{ items: footerMenuItems }}
         placement="topLeft"
         trigger={["click"]}

@@ -2,8 +2,8 @@
   position: relative;
   display: grid;
   width: 100%;
-  height: var(--app-sidebar-item-height, 40px);
-  grid-template-columns: var(--app-sidebar-row-icon-column, 56px) minmax(0, 1fr);
+  height: 40px;
+  grid-template-columns: 56px minmax(0, 1fr);
   align-items: center;
   padding: 0;
   border: 0;
@@ -15,8 +15,8 @@
   line-height: 1;
   text-align: left;
   transition:
-    color var(--app-sidebar-row-transition, 160ms ease),
-    background-color var(--app-sidebar-row-transition, 160ms ease);
+    color 160ms ease,
+    background-color 160ms ease;
 
   &:hover,
   &:focus-visible {
@@ -33,7 +33,7 @@
   width: 2px;
   background: transparent;
   content: "";
-  transition: background-color var(--app-sidebar-row-transition, 160ms ease);
+  transition: background-color 160ms ease;
 }
 
 .itemActive {
@@ -46,13 +46,13 @@
 }
 
 .itemProfile {
-  height: var(--app-sidebar-profile-height, 44px);
-  grid-template-columns: var(--app-sidebar-row-icon-column, 56px) minmax(0, 1fr) 32px;
+  height: 44px;
+  grid-template-columns: 56px minmax(0, 1fr) 32px;
 }
 
 .iconSlot {
   display: inline-flex;
-  width: var(--app-sidebar-icon-slot, 68px);
+  width: var(--app-sidebar-collapsed-width, 68px);
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -66,8 +66,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   transition:
-    opacity var(--app-sidebar-row-transition, 160ms ease),
-    transform var(--app-sidebar-row-transition, 160ms ease);
+    opacity 160ms ease,
+    transform 160ms ease;
 }
 
 .itemProfile .label {
@@ -104,7 +104,7 @@
   color: var(--ant-color-text-tertiary, #9d927f);
   font-size: 16px;
   opacity: 1;
-  transition: opacity var(--app-sidebar-row-transition, 160ms ease);
+  transition: opacity 160ms ease;
 }
 
 .itemCollapsed .label {

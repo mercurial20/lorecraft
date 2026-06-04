@@ -18,7 +18,6 @@ const AppSidebar = () => {
   const sidebarCollapsed = useUIStore((state) => state.sidebarCollapsed);
   const sidebarStyle = {
     "--app-sidebar-collapsed-width": `${APP_SIDEBAR_COLLAPSED_WIDTH}px`,
-    "--app-sidebar-width": `${APP_SIDEBAR_WIDTH}px`,
   } as CSSProperties;
 
   return (
