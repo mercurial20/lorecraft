@@ -2,6 +2,7 @@ import { AppstoreOutlined, BgColorsOutlined } from "@ant-design/icons";
 import type { ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router";
 
+import { APP_ROUTES } from "@/shared/routing/routes";
 import { useUIStore } from "@/shared/stores/useUIStore";
 
 import { AppSidebarItem } from "../Item";
@@ -18,12 +19,12 @@ const sidebarItems: SidebarItem[] = [
   {
     icon: <AppstoreOutlined />,
     label: "Dashboard",
-    path: "/",
+    path: APP_ROUTES.dashboard,
   },
   {
     icon: <BgColorsOutlined />,
     label: "Theme Showcase",
-    path: "/theme-showcase",
+    path: APP_ROUTES.themeShowcase,
   },
 ];
 

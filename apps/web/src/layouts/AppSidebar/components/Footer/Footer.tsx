@@ -5,10 +5,11 @@ import {
   SettingOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Dropdown, type MenuProps } from "antd";
+import type { MenuProps } from "antd";
 
 import { useUIStore } from "@/shared/stores/useUIStore";
 
+import { AppSidebarDropdown } from "../Dropdown";
 import { AppSidebarItem } from "../Item";
 
 import styles from "./Footer.module.scss";
@@ -45,11 +46,10 @@ const AppSidebarFooter = () => {
 
   return (
     <div className={styles.container}>
-      <Dropdown
-        classNames={{ root: styles.dropdown }}
+      <AppSidebarDropdown
+        collapsed={sidebarCollapsed}
         menu={{ items: footerMenuItems }}
         placement="topLeft"
-        styles={{ root: { minWidth: sidebarCollapsed ? 220 : 260 } }}
         trigger={["click"]}
       >
         <AppSidebarItem
@@ -61,7 +61,7 @@ const AppSidebarFooter = () => {
           suffix={<MoreOutlined />}
           variant="profile"
         />
-      </Dropdown>
+      </AppSidebarDropdown>
     </div>
   );
 };

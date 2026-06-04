@@ -6,9 +6,3 @@
   overflow: hidden;
   border-top: 1px solid var(--ant-color-split, rgba(77, 70, 53, 0.72));
 }
-
-.dropdown {
-  :global(.ant-dropdown-menu) {
-    border: 1px solid var(--ant-color-border-secondary, #342f24);
-  }
-}

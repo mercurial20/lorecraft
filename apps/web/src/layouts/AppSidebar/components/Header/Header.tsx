@@ -5,6 +5,7 @@ import { SidebarIconOutlined } from "@/shared/icons/SidebarIconOutlined";
 import { useUIStore } from "@/shared/stores/useUIStore";
 
 import { AppSidebarSearch } from "../Search";
+import { AppSidebarWorldSelect } from "../WorldSelect";
 
 import styles from "./Header.module.scss";
 
@@ -23,12 +24,16 @@ const AppSidebarHeader = () => {
           Lorecraft
         </h3>
         <Button
+          aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           type="text"
           className={styles.actionButton}
           icon={<SidebarIconOutlined />}
           onClick={toggleSidebar}
         />
       </Flex>
+      <div className={styles.worldArea}>
+        <AppSidebarWorldSelect />
+      </div>
       <div className={styles.searchArea}>
         <AppSidebarSearch />
       </div>

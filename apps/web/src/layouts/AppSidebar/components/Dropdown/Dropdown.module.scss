@@ -1,0 +1,8 @@
+.dropdown {
+  :global(.ant-dropdown-menu) {
+    width: var(--app-sidebar-dropdown-width, auto) !important;
+    min-width: 0 !important;
+    margin-inline-start: var(--app-sidebar-dropdown-inset, 0);
+    border: 1px solid var(--ant-color-border-secondary, #342f24);
+  }
+}
