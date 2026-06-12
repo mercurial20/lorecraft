@@ -16,7 +16,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "drizzle-orm": "^0.45.2",
     "pg": "^8.21.0"
@@ -30,15 +30,18 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
     },
     "./schema": {
       "types": "./dist/schema.d.ts",
-      "import": "./dist/schema.js"
+      "import": "./dist/schema.js",
+      "require": "./dist/schema.js"
     },
     "./postgres": {
       "types": "./dist/postgres.d.ts",
-      "import": "./dist/postgres.js"
+      "import": "./dist/postgres.js",
+      "require": "./dist/postgres.js"
     }
   }
 }

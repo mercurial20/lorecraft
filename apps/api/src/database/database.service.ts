@@ -4,13 +4,14 @@ import {
   PostgresDb,
 } from '@lorecraft/db/postgres';
 import { Injectable, OnApplicationShutdown } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class DatabaseService implements OnApplicationShutdown {
   private readonly connection: PostgresConnection;
 
-  constructor() {
-    const databaseUrl = process.env.DATABASE_URL;
+  constructor(private readonly configService: ConfigService) {
+    const databaseUrl = this.configService.get<string>('DATABASE_URL');
 
     if (!databaseUrl) {
       throw new Error('Database url is not provided in env');
@@ -26,5 +27,4 @@ export class DatabaseService implements OnApplicationShutdown {
   async onApplicationShutdown(): Promise<void> {
     await this.connection.close();
   }
-  Е;
 }
