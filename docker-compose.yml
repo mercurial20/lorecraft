@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: lorecraft_postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=lorecraft
+      - POSTGRES_PASSWORD=lorecraft_password
+      - POSTGRES_DB=lorecraft
+    volumes:
+      - lorecraft_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  lorecraft_postgres_data:

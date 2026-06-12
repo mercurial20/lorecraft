@@ -1,0 +1,1 @@
+ALTER TABLE "world" ADD COLUMN "genre_ids" uuid[] DEFAULT '{}' NOT NULL;

@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1781085825420,
+      "tag": "0000_watery_shape",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781188204811,
+      "tag": "0001_abandoned_adam_destine",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781188232158,
+      "tag": "0002_fair_meltdown",
+      "breakpoints": true
+    }
+  ]
+}

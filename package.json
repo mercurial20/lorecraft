@@ -3,10 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:reset": "docker compose down -v && docker compose up -d",
+    "db:generate": "pnpm --filter @lorecraft/db db:generate",
+    "db:migrate": "pnpm --filter @lorecraft/db db:migrate",
+    "db:studio": "pnpm --filter @lorecraft/db db:studio"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.12.1",
-  "private": true
+  "packageManager": "pnpm@11.5.2",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
 }
