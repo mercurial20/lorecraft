@@ -1,7 +1,6 @@
 import {
   AppstoreOutlined,
   BgColorsOutlined,
-  GlobalOutlined,
 } from "@ant-design/icons";
 import type { ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router";
@@ -24,11 +23,6 @@ const sidebarItems: SidebarItem[] = [
     icon: <AppstoreOutlined />,
     label: "Dashboard",
     path: APP_ROUTES.dashboard,
-  },
-  {
-    icon: <GlobalOutlined />,
-    label: "Worlds",
-    path: APP_ROUTES.worlds,
   },
   {
     icon: <BgColorsOutlined />,
