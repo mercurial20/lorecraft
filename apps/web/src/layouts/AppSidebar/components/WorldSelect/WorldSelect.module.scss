@@ -11,3 +11,25 @@
 .chevron {
   font-size: 12px;
 }
+
+.worldMenuLabel {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.worldMenuName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activeTag {
+  flex: 0 0 auto;
+  margin-inline-end: 0;
+  font-size: 10px;
+  line-height: 16px;
+}

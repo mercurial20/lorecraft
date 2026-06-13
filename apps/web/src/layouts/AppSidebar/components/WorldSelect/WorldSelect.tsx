@@ -1,73 +1,159 @@
 import {
-  CheckOutlined,
   DownOutlined,
   GlobalOutlined,
+  LoadingOutlined,
   PlusOutlined,
+  SettingOutlined,
+  UnorderedListOutlined,
 } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { useCallback, useMemo, useState } from "react";
+import { type MenuProps,Tag } from "antd";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
+import { type World, WorldsService } from "@/shared/api/worlds";
+import { APP_ROUTES, buildWorldSettingsPath } from "@/shared/routing/routes";
 import { useUIStore } from "@/shared/stores/useUIStore";
+import { useWorldStore } from "@/shared/stores/useWorldStore";
 
 import { AppSidebarDropdown } from "../Dropdown";
 import { AppSidebarItem } from "../Item";
 import {
-  APP_SIDEBAR_DEFAULT_WORLD_ID,
   APP_SIDEBAR_WORLD_CREATE_KEY,
   APP_SIDEBAR_WORLD_CREATE_LABEL,
-  APP_SIDEBAR_WORLD_CREATE_PATH,
-  APP_SIDEBAR_WORLD_HOME_PATH,
-  APP_SIDEBAR_WORLDS,
+  APP_SIDEBAR_WORLD_MANAGE_KEY,
+  APP_SIDEBAR_WORLD_MANAGE_LABEL,
+  APP_SIDEBAR_WORLD_SETTINGS_KEY,
+  APP_SIDEBAR_WORLD_SETTINGS_LABEL,
 } from "./WorldSelect.constants";
 
 import styles from "./WorldSelect.module.scss";
 
-const getWorldById = (worldId: string) =>
-  APP_SIDEBAR_WORLDS.find((world) => world.id === worldId) ??
-  APP_SIDEBAR_WORLDS[0];
-
 const AppSidebarWorldSelect = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedWorldId, setSelectedWorldId] = useState(
-    APP_SIDEBAR_DEFAULT_WORLD_ID,
-  );
+  const [worlds, setWorlds] = useState<World[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
   const sidebarCollapsed = useUIStore((state) => state.sidebarCollapsed);
+  const activeWorldId = useWorldStore((state) => state.activeWorldId);
+  const openCreateWorldDrawer = useWorldStore(
+    (state) => state.openCreateWorldDrawer,
+  );
+  const setActiveWorldId = useWorldStore((state) => state.setActiveWorldId);
+  const worldsRevision = useWorldStore((state) => state.worldsRevision);
   const location = useLocation();
   const navigate = useNavigate();
 
   const selectedWorld = useMemo(
-    () => getWorldById(selectedWorldId),
-    [selectedWorldId],
+    () => worlds.find((world) => world.id === activeWorldId) ?? null,
+    [activeWorldId, worlds],
   );
-  const createWorldActive =
-    location.pathname === APP_SIDEBAR_WORLD_CREATE_PATH;
+
+  const loadWorlds = useCallback(async () => {
+    setLoading(true);
+    setLoadError(false);
+
+    try {
+      const worldList = await WorldsService.list();
+      setWorlds(worldList);
+
+      if (
+        activeWorldId &&
+        !worldList.some((world) => world.id === activeWorldId)
+      ) {
+        setActiveWorldId(null);
+      }
+    } catch {
+      setLoadError(true);
+    } finally {
+      setLoading(false);
+    }
+  }, [activeWorldId, setActiveWorldId]);
+
+  useEffect(() => {
+    void Promise.resolve().then(loadWorlds);
+  }, [loadWorlds, worldsRevision]);
+
+  const worldsRouteActive = location.pathname === APP_ROUTES.worlds;
+  const worldSettingsActive =
+    !!selectedWorld &&
+    location.pathname === buildWorldSettingsPath(selectedWorld.id);
 
   const selectedKeys = useMemo(
-    () => [
-      createWorldActive ? APP_SIDEBAR_WORLD_CREATE_KEY : selectedWorldId,
-    ],
-    [createWorldActive, selectedWorldId],
+    () => {
+      if (worldsRouteActive) {
+        return [APP_SIDEBAR_WORLD_MANAGE_KEY];
+      }
+
+      return activeWorldId ? [activeWorldId] : [];
+    },
+    [activeWorldId, worldsRouteActive],
   );
 
   const menuItems = useMemo<MenuProps["items"]>(
-    () => [
-      {
-        key: APP_SIDEBAR_WORLD_CREATE_KEY,
-        icon: <PlusOutlined />,
-        label: APP_SIDEBAR_WORLD_CREATE_LABEL,
-      },
-      {
-        type: "divider",
-      },
-      ...APP_SIDEBAR_WORLDS.map((world) => ({
-        key: world.id,
-        icon:
-          world.id === selectedWorldId ? <CheckOutlined /> : <GlobalOutlined />,
-        label: world.name,
-      })),
-    ],
-    [selectedWorldId],
+    () => {
+      const worldItems: NonNullable<MenuProps["items"]> = loading
+        ? [
+            {
+              key: "loading-worlds",
+              disabled: true,
+              icon: <LoadingOutlined />,
+              label: "Loading worlds",
+            },
+          ]
+        : worlds.map((world) => ({
+            key: world.id,
+            icon: <GlobalOutlined />,
+            label: (
+              <span className={styles.worldMenuLabel}>
+                <span className={styles.worldMenuName}>{world.name}</span>
+                {world.id === activeWorldId ? (
+                  <Tag
+                    bordered={false}
+                    color="gold"
+                    className={styles.activeTag}
+                  >
+                    Active
+                  </Tag>
+                ) : null}
+              </span>
+            ),
+          }));
+
+      if (!loading && !worldItems.length) {
+        worldItems.push({
+          key: "empty-worlds",
+          disabled: true,
+          label: loadError ? "Worlds unavailable" : "No worlds yet",
+        });
+      }
+
+      return [
+        {
+          key: APP_SIDEBAR_WORLD_CREATE_KEY,
+          icon: <PlusOutlined />,
+          label: APP_SIDEBAR_WORLD_CREATE_LABEL,
+        },
+        {
+          key: APP_SIDEBAR_WORLD_MANAGE_KEY,
+          icon: <UnorderedListOutlined />,
+          label: APP_SIDEBAR_WORLD_MANAGE_LABEL,
+        },
+        {
+          type: "divider",
+        },
+        ...worldItems,
+        {
+          type: "divider",
+        },
+        {
+          key: APP_SIDEBAR_WORLD_SETTINGS_KEY,
+          disabled: !selectedWorld,
+          icon: <SettingOutlined />,
+          label: APP_SIDEBAR_WORLD_SETTINGS_LABEL,
+        },
+      ];
+    },
+    [activeWorldId, loadError, loading, selectedWorld, worlds],
   );
 
   const handleMenuClick = useCallback<NonNullable<MenuProps["onClick"]>>(
@@ -75,18 +161,37 @@ const AppSidebarWorldSelect = () => {
       setMenuOpen(false);
 
       if (key === APP_SIDEBAR_WORLD_CREATE_KEY) {
-        navigate(APP_SIDEBAR_WORLD_CREATE_PATH);
+        openCreateWorldDrawer();
         return;
       }
 
-      setSelectedWorldId(key);
+      if (key === APP_SIDEBAR_WORLD_MANAGE_KEY) {
+        navigate(APP_ROUTES.worlds);
+        return;
+      }
 
-      if (location.pathname === APP_SIDEBAR_WORLD_CREATE_PATH) {
-        navigate(APP_SIDEBAR_WORLD_HOME_PATH);
+      if (key === APP_SIDEBAR_WORLD_SETTINGS_KEY && selectedWorld) {
+        navigate(buildWorldSettingsPath(selectedWorld.id));
+        return;
+      }
+
+      const world = worlds.find((item) => item.id === key);
+
+      if (world) {
+        setActiveWorldId(world.id);
+        navigate(buildWorldSettingsPath(world.id));
       }
     },
-    [location.pathname, navigate],
+    [navigate, openCreateWorldDrawer, selectedWorld, setActiveWorldId, worlds],
   );
+
+  const handleOpenChange = (open: boolean) => {
+    setMenuOpen(open);
+
+    if (open) {
+      void loadWorlds();
+    }
+  };
 
   return (
     <div className={styles.root}>
@@ -96,19 +201,19 @@ const AppSidebarWorldSelect = () => {
           onClick: handleMenuClick,
           selectedKeys,
         }}
-        onOpenChange={setMenuOpen}
+        onOpenChange={handleOpenChange}
         open={menuOpen}
         placement="bottomLeft"
         trigger={["click"]}
       >
         <AppSidebarItem
-          active={createWorldActive}
+          active={worldSettingsActive}
           aria-label="Change world"
           className={styles.trigger}
           collapsed={sidebarCollapsed}
-          description={selectedWorld.description}
+          description={selectedWorld ? "Current world" : "No active world"}
           icon={<GlobalOutlined />}
-          label={selectedWorld.name}
+          label={selectedWorld?.name ?? "Select world"}
           suffix={
             sidebarCollapsed ? undefined : (
               <DownOutlined className={styles.chevron} />

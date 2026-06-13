@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Outlet } from "react-router";
 
 import { Spinner } from "@/shared/ui/Spinner";
+import { WorldCreateDrawerHost } from "@/shared/worlds/WorldCreateDrawerHost";
 
 import { AppSidebar } from "../AppSidebar/AppSidebar";
 
@@ -19,6 +20,7 @@ const AppLayout = () => {
           </Suspense>
         </Flex>
       </Flex>
+      <WorldCreateDrawerHost />
     </Layout>
   );
 };
