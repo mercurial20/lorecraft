@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { WorldsModule } from './worlds/worlds.module';
 import { ConfigModule } from '@nestjs/config';
+import { EncryptionModule } from './encryption/encryption.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: ['../../.env', '.env'],
     }),
     WorldsModule,
+    EncryptionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
